@@ -14,7 +14,11 @@
 //= require jquery_ujs
 //= require jquery.ui.widget
 //= require z.jquery.fileupload
-//= require bootstrap-sprockets
+//= require jquery.turbolinks
+//= require turbolinks
+//= require materialize
+//= require materialize-sprockets
+//= require materialize/extras/nouislider
 //= require_tree .
 
 $(function() {

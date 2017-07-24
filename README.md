@@ -3,8 +3,6 @@
 
 View it live at: https://grab-bag-1701.herokuapp.com/
 
-![schema pic](app/assets/images/home.png?raw=true)
-
 ## Overview
 
 The goal of this project was to 'clone' the base functionality of Dropbox.
@@ -74,11 +72,3 @@ A visual representation of the schema is here:
 ### Dependencies
 
 * This application depends on many ruby gems, all of which are found in the `Gemfile` and can be installed by running `bundle install` from the terminal in the main directory of the project.
-
-### Contributors
-
-[Joseph Glass](https://github.com/glassjoseph)  
-[Jonathan Kidd](https://github.com/jk1dd)  
-[Sam Landfried](https://github.com/samlandfried)  
-[Danny Radden](https://github.com/dannyradden)  
-[Brett Schwartz](https://github.com/bschwartz10/)

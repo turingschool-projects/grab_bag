@@ -11,6 +11,10 @@ class Users::Folders::BinariesController < Users::BaseController
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
 
+    action = params[:binary][:data_url]
+    path = params[:binary][:data_url].tempfile
+
+    binding.pry
     binary_name = get_name
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,

@@ -1,6 +1,6 @@
-class CreateMetaDatas < ActiveRecord::Migration[5.0]
+class CreateMetaData < ActiveRecord::Migration[5.0]
   def change
-    create_table :meta_datas do |t|
+    create_table :meta_data do |t|
       t.references :user, foreign_key: true
       t.integer :width
       t.integer :height

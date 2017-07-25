@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170725202430) do
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
-  create_table "meta_datas", force: :cascade do |t|
+  create_table "meta_data", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "width"
     t.integer  "height"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20170725202430) do
     t.float    "long"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["user_id"], name: "index_meta_datas_on_user_id", using: :btree
+    t.index ["user_id"], name: "index_meta_data_on_user_id", using: :btree
   end
 
   create_table "shared_folders", force: :cascade do |t|
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20170725202430) do
   add_foreign_key "folders", "folders"
   add_foreign_key "folders", "users"
   add_foreign_key "likes", "users"
-  add_foreign_key "meta_datas", "users"
+  add_foreign_key "meta_data", "users"
   add_foreign_key "shared_folders", "folders"
   add_foreign_key "shared_folders", "users"
 end

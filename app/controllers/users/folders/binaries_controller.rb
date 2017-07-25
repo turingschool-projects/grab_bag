@@ -10,7 +10,7 @@ class Users::Folders::BinariesController < Users::BaseController
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
-    
+
     meta_object = EXIFR::JPEG.new(params[:binary][:data_url].tempfile)
     MetaDataService.new(meta_object, current_user).add_info
 

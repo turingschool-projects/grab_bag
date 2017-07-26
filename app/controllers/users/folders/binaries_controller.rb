@@ -11,6 +11,9 @@ class Users::Folders::BinariesController < Users::BaseController
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
 
+    meta_object = EXIFR::JPEG.new(params[:binary][:data_url].tempfile)
+    MetaDataService.new(meta_object, current_user).add_info
+
     binary_name = get_name
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,

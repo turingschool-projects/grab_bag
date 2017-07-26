@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525030748) do
+ActiveRecord::Schema.define(version: 20170725202430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,20 @@ ActiveRecord::Schema.define(version: 20170525030748) do
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
+  create_table "meta_data", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "model"
+    t.string   "shutter_speed"
+    t.float    "aperture"
+    t.float    "lat"
+    t.float    "long"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["user_id"], name: "index_meta_data_on_user_id", using: :btree
+  end
+
   create_table "shared_folders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "folder_id"
@@ -92,6 +106,7 @@ ActiveRecord::Schema.define(version: 20170525030748) do
   add_foreign_key "folders", "folders"
   add_foreign_key "folders", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "meta_data", "users"
   add_foreign_key "shared_folders", "folders"
   add_foreign_key "shared_folders", "users"
 end

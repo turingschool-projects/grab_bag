@@ -51,4 +51,5 @@ Rails.application.routes.draw do
     get '/', to: 'users#show'
   end
 
+  resources :photos, only: [:index]
 end

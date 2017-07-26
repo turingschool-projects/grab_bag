@@ -43,6 +43,7 @@ gem 'twilio-ruby'
 gem 'bcrypt'
 gem 'database_cleaner'
 gem 'will_paginate'
+gem 'sprockets-rails', '2.3.3'
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 gem 'exifr'
 # Use Capistrano for deployment

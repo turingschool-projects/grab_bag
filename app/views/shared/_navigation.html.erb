@@ -1,8 +1,6 @@
 <a class="brand-logo left" href='<%= landing_page_path %>'>Dark Clout</a>
 <ul id="nav-mobile" class="right hide-on-med-and-down">
   <% if current_user %>
-  <li><%= link_to "Create", users_new_folder_path(@current_folder.owner.username) %></li>
-  <li><%= link_to "Upload", users_new_binary_path(@current_folder.owner.username, @current_folder.route)%></li>
   <li><%= link_to "My Profile", users_dashboard_path(current_user.username) %>My Profile</li>
   <li><%= link_to "Logout", signout_path %> </li>
   <% else %>

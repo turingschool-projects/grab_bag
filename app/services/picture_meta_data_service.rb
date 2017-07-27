@@ -1,8 +1,9 @@
 class PictureMetaDataService
 
-  def initialize(exif_object, current_user)
+  def initialize(exif_object, current_user, binary_id = nil)
     @exifr = exif_object
     @user = current_user
+    @binary_id = binary_id.to_i
   end
 
   def collect
@@ -21,7 +22,7 @@ class PictureMetaDataService
 
 
   private
-    attr_reader :exifr, :user
+    attr_reader :exifr, :user, :binary_id
 
     def gps_data?
       exifr.gps == nil ? false : true

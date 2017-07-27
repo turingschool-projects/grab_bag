@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170727171145) do
+ActiveRecord::Schema.define(version: 20170727172425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,11 +72,20 @@ ActiveRecord::Schema.define(version: 20170727171145) do
     t.float    "long"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["user_id"], name: "index_meta_data_on_user_id", using: :btree
+  end
+
+  create_table "meta_data_file", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "binaries_id"
     t.string   "text"
     t.integer  "word_count"
     t.string   "top_adjective"
     t.string   "top_noun"
-    t.index ["user_id"], name: "index_meta_data_on_user_id", using: :btree
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["binaries_id"], name: "index_meta_data_file_on_binaries_id", using: :btree
+    t.index ["user_id"], name: "index_meta_data_file_on_user_id", using: :btree
   end
 
   create_table "shared_folders", force: :cascade do |t|
@@ -111,6 +120,8 @@ ActiveRecord::Schema.define(version: 20170727171145) do
   add_foreign_key "folders", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "meta_data", "users"
+  add_foreign_key "meta_data_file", "binaries", column: "binaries_id"
+  add_foreign_key "meta_data_file", "users"
   add_foreign_key "shared_folders", "folders"
   add_foreign_key "shared_folders", "users"
 end

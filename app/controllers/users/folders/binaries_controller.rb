@@ -15,12 +15,11 @@ class Users::Folders::BinariesController < Users::BaseController
     # MetaDataService.new(meta_object, current_user).add_info
 
     path = params[:binary][:data_url].tempfile
-    DataSlurper.new(path, binary_name.last, current_user).direct_slurping
-
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,
                      folder_id: folder.id
       )
+      DataSlurper.new(path, binary_name.last, current_user, binary.id).direct_slurping
       redirect_to binary.url, success: "File created"
     else
       render :new, error: "There was a problem submitting your attachment."

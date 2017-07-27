@@ -54,4 +54,14 @@ Rails.application.routes.draw do
     get '/', to: 'users#show'
   end
 
+<<<<<<< HEAD
+=======
+  resources :photos, only: [:index]
+
+  namespace :api do
+    namespace :v1 do
+      get '/user', to: "users#show"
+    end
+  end
+>>>>>>> added gems to gemfile. created serializer for user. updates routes for user show api.
 end

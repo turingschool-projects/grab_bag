@@ -1,5 +1,5 @@
 class Binary < ApplicationRecord
-  before_destroy :reset_meta_data_connection
+  # before_destroy :reset_meta_data_connection
   validates :name, presence: true
   validates :extension, presence: true
   validates :data_url, presence: true

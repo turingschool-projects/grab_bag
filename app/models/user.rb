@@ -28,6 +28,7 @@ class User < ApplicationRecord
   has_many :owned_folders, class_name: "Folder", foreign_key: "user_id"
   has_many :comments
   has_many :folders
+  has_many :meta_data
 
   after_create :make_home
 
@@ -43,7 +44,7 @@ class User < ApplicationRecord
       user.avatar_url = auth["info"]["image"]
       user.token = auth["credentials"]["token"]
     end
-    
+
   end
   def disable
     self.owned_folders.update_all(status: "inactive")

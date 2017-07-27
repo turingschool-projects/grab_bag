@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/sign_up', to: 'sign_up#create'
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
+  resources :dashboard, only: [:index]
   resources :photos, only: [:index]
 
   resources :public_folders, only: :index

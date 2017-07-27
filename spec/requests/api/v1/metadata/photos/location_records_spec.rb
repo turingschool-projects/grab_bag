@@ -17,8 +17,10 @@ RSpec.describe "photo locations meta data records api" do
       expect(response).to have_http_status(200)
       expect(result.first["lat"]).to eq(metadata_1.lat)
       expect(result.first["long"]).to eq(metadata_1.long)
+      expect(result.first["created_at"]).to eq(metadata_1.created_at)
       expect(result.last["lat"]).to eq(metadata_3.lat)
       expect(result.last["long"]).to eq(metadata_3.long)
+      expect(result.last["created_at"]).to eq(metadata_3.created_at)
     end
   end
 end

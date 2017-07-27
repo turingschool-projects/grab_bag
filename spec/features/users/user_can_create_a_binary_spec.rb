@@ -12,8 +12,8 @@ RSpec.feature "User can create a new binary" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit user.home.url
-      click_on "Upload File"
 
+      click_on "Upload File"
       expect(current_path).to eq("/#{user.username}/home/binary_new")
     end
 

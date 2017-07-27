@@ -7,7 +7,7 @@ RSpec.describe "users records api", type: :request do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       get '/api/v1/user'
-      binding.pry
+
       result = JSON.parse(response.body)
 
       expect(response).to have_http_status(200)

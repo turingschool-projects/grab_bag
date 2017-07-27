@@ -3,11 +3,12 @@ class FileMetaDataService
   def initialize(meta_object, current_user)
     @yomu = meta_object
     @user = current_user
+    @tgr = EngTagger.new
   end
 
   def collect
     text = yomu.text.to_s.delete!("\n")
-    words ||= text_detector(text)
+    words = text_detector(text)
     MetaData.create!(text: text,
                       word_count: text.length,
                       top_adjective: words[:adjectives].first[0],
@@ -18,11 +19,10 @@ class FileMetaDataService
 
   private
 
-  attr_reader :yomu, :user
+  attr_reader :yomu, :user, :tgr
 
   def text_detector(text)
     output = {}
-    tgr = EngTagger.new
     tags = tgr.add_tags(text)
     output[:adjectives] = collect_adjectives(tgr, tags)
     output[:nouns] = collect_nouns(tgr, tags)

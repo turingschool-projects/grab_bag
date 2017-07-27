@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725202430) do
+ActiveRecord::Schema.define(version: 20170727171145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,10 @@ ActiveRecord::Schema.define(version: 20170725202430) do
     t.float    "long"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "text"
+    t.integer  "word_count"
+    t.string   "top_adjective"
+    t.string   "top_noun"
     t.index ["user_id"], name: "index_meta_data_on_user_id", using: :btree
   end
 

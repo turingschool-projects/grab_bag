@@ -4,7 +4,6 @@ class Api::V1::MetaData::Photos::LocationsController < ApplicationController
     @locs = []
     locations.each do |loc|
       @locs << {latitude: loc.lat, longitude: loc.long}
-      # @locs["data"].store(latitude: loc.lat, longitude: loc.long)
     end
     render json: @locs
   end

@@ -62,5 +62,4 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: [:index]
-
 end

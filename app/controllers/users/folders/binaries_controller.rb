@@ -14,8 +14,8 @@ class Users::Folders::BinariesController < Users::BaseController
     # MetaDataService.new(meta_object, current_user).add_info
 
     path = params[:binary][:data_url].tempfile
-    binding.pry
     binary_name = get_name
+    DataSlurper.new(path, binary_name.last).direct_slurping
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,
                      folder_id: folder.id

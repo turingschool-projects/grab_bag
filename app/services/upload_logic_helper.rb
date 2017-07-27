@@ -6,6 +6,7 @@ class UploadLogicHelper
 
   def topwords
     binding.pry
+    MetaDataFile.where(user_id: user.id).order(:top_adjective).limit(5)
   end
 
   private

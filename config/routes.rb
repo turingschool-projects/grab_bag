@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get '/user', to: "users#show"
-      resources :metadata, only: [:index, :show]
+        get '/user', to: "users#show"
+      namespace :meta_data do
+        namespace :photos do
+          get '/locations', to: "locations#index"
+        end
+      end
     end
   end
 

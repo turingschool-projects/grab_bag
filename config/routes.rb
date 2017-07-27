@@ -3,6 +3,13 @@ Rails.application.routes.draw do
 
   root 'landing#index', as: :landing_page
 
+  namespace :api do
+    namespace :v1 do
+      get '/user', to: "users#show"
+      resources :metadata, only: [:index, :show]
+    end
+  end
+
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
 
@@ -52,10 +59,4 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: [:index]
-
-  namespace :api do
-    namespace :v1 do
-      get '/user', to: "users#show"
-    end
-  end
 end

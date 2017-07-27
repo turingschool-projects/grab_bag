@@ -20,7 +20,7 @@ RSpec.feature "User can create a new binary" do
     xit "can upload a file" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit users_binary_new_path(user.username, user.home.route)
+      visit users_new_binary_path(user.username, user.home.route)
 
       attach_file(:binary_data_url, Rails.root + "spec/fixtures/files/test.txt")
 

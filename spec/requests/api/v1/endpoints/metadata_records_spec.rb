@@ -14,7 +14,6 @@ RSpec.describe "meta data records api" do
 
       expect(response).to have_http_status(200)
       expect(result[])
-      #expect meta data to be present and called upon
     end
   end
 end

@@ -9,4 +9,9 @@ RSpec.describe "meta data records api" do
       get 'api/v1/metadata'
 
       result = JSON.parse(response.body)
+
+      expect(response).to have_http_status(200)
+      expect(result[])
+    end
+  end
 end

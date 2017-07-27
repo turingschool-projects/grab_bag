@@ -52,4 +52,10 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: [:index]
+
+  namespace :api do
+    namespace :v1 do
+      get '/user', to: "users#show"
+    end
+  end
 end

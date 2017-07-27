@@ -9,10 +9,12 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= render partial: 'shared/flash' %>
-      <%= render partial: 'shared/navigation' %>
+    <%= render partial: 'shared/flash' %>
+    <nav>
+      <div class="nav-wrapper">
+        <%= render partial: 'shared/navigation' %>
+      </div>
+    </nav>
       <%= yield %>
-    </div>
   </body>
 </html>

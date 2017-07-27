@@ -10,12 +10,13 @@ class Users::Folders::BinariesController < Users::BaseController
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
+    binary_name = get_name
     # meta_object = EXIFR::JPEG.new(params[:binary][:data_url].tempfile)
     # MetaDataService.new(meta_object, current_user).add_info
 
     path = params[:binary][:data_url].tempfile
-    binary_name = get_name
-    DataSlurper.new(path, binary_name.last).direct_slurping
+    DataSlurper.new(path, binary_name.last, current_user).direct_slurping
+
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,
                      folder_id: folder.id

@@ -1,11 +1,11 @@
-class MetaDataService
+class PictureMetaDataService
 
   def initialize(exif_object, current_user)
     @exifr = exif_object
     @user = current_user
   end
 
-  def add_info
+  def collect
     info = MetaData.create!(width: exifr.width,
                   height: exifr.height,
                   model: exifr.model,

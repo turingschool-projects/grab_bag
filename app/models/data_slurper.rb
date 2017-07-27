@@ -1,10 +1,11 @@
 class DataSlurper
 
-  def initialize(path, extension)
+  def initialize(path, extension, current_user)
     @path = path
     @extension = extension
     @pictures = (%w(jpeg tiff))
     @files = (%w(docx pdf doc xls xlsx ppt pptx))
+    @user = current_user
   end
 
   def direct_slurping
@@ -15,16 +16,17 @@ class DataSlurper
     end
   end
 
-
-
   private
-  attr_reader :path, :extension, :pictures, :files
+  attr_reader :path, :extension, :pictures, :files, :user
 
   def file_slurping
     yomu = Yomu.new(path)
-
+    FileMetaDataService.new(yomu, user).collect
+    text = yomu.text.to_s.delete!("\n")
   end
 
   def picture_slurping
+    exif_object = EXIFR::JPEG.new(path)
+    PictureMetaDataService.new(exif_object, user).collect
   end
 end

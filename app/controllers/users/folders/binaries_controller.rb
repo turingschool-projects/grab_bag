@@ -10,15 +10,14 @@ class Users::Folders::BinariesController < Users::BaseController
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
-
-    meta_object = EXIFR::JPEG.new(params[:binary][:data_url].tempfile)
-    MetaDataService.new(meta_object, current_user).add_info
-
     binary_name = get_name
+
+    path = params[:binary][:data_url].tempfile
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,
                      folder_id: folder.id
       )
+      DataSlurper.new(path, binary_name.last, current_user, binary.id).direct_slurping
       redirect_to binary.url, success: "File created"
     else
       render :new, error: "There was a problem submitting your attachment."
@@ -31,7 +30,6 @@ class Users::Folders::BinariesController < Users::BaseController
 
     @binary = Binary.find_by(name: params[:binary_name])
     @comment = Comment.new
-
     render 'users/folders/binaries/show.html.erb'
   end
 
@@ -46,7 +44,7 @@ class Users::Folders::BinariesController < Users::BaseController
 private
 
   def get_name
-    binary_params[:data_url].split('/').last.split('.')
+    binary_params[:data_url].original_filename.split('/').last.split('.')
   end
 
   def binary_params

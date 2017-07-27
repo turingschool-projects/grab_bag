@@ -1,11 +1,12 @@
-class MetaDataService
+class PictureMetaDataService
 
-  def initialize(exif_object, current_user)
+  def initialize(exif_object, current_user, binary_id = nil)
     @exifr = exif_object
     @user = current_user
+    @binary_id = binary_id.to_i
   end
 
-  def add_info
+  def collect
     info = MetaData.create!(width: exifr.width,
                   height: exifr.height,
                   model: exifr.model,
@@ -21,7 +22,7 @@ class MetaDataService
 
 
   private
-    attr_reader :exifr, :user
+    attr_reader :exifr, :user, :binary_id
 
     def gps_data?
       exifr.gps == nil ? false : true

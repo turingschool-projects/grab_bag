@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/user', to: "users#show"
+      get '/file/topwords', to: "file#topwords"
       resources :metadata, only: [:index, :show]
     end
   end

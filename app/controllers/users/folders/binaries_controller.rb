@@ -10,10 +10,11 @@ class Users::Folders::BinariesController < Users::BaseController
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
+    # meta_object = EXIFR::JPEG.new(params[:binary][:data_url].tempfile)
+    # MetaDataService.new(meta_object, current_user).add_info
 
-    meta_object = EXIFR::JPEG.new(params[:binary][:data_url].tempfile)
-    MetaDataService.new(meta_object, current_user).add_info
-
+    path = params[:binary][:data_url].tempfile
+    binding.pry
     binary_name = get_name
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,
@@ -31,7 +32,6 @@ class Users::Folders::BinariesController < Users::BaseController
 
     @binary = Binary.find_by(name: params[:binary_name])
     @comment = Comment.new
-
     render 'users/folders/binaries/show.html.erb'
   end
 
@@ -46,7 +46,7 @@ class Users::Folders::BinariesController < Users::BaseController
 private
 
   def get_name
-    binary_params[:data_url].split('/').last.split('.')
+    binary_params[:data_url].original_filename.split('/').last.split('.')
   end
 
   def binary_params

@@ -21,6 +21,7 @@ private
   end
 
   def text_preview(binary)
+    binding.pry
     response = Faraday.get(binary.data_url)
     text = response.body
 

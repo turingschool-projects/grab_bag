@@ -22,7 +22,6 @@ class DataSlurper
   def file_slurping
     yomu = Yomu.new(path)
     FileMetaDataService.new(yomu, user).collect
-    text = yomu.text.to_s.delete!("\n")
   end
 
   def picture_slurping

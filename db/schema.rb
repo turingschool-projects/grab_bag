@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170727172425) do
     t.index ["user_id"], name: "index_meta_data_on_user_id", using: :btree
   end
 
-  create_table "meta_data_file", force: :cascade do |t|
+  create_table "meta_data_files", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "binaries_id"
     t.string   "text"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20170727172425) do
     t.string   "top_noun"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["binaries_id"], name: "index_meta_data_file_on_binaries_id", using: :btree
-    t.index ["user_id"], name: "index_meta_data_file_on_user_id", using: :btree
+    t.index ["binaries_id"], name: "index_meta_data_files_on_binaries_id", using: :btree
+    t.index ["user_id"], name: "index_meta_data_files_on_user_id", using: :btree
   end
 
   create_table "shared_folders", force: :cascade do |t|
@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(version: 20170727172425) do
   add_foreign_key "folders", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "meta_data", "users"
-  add_foreign_key "meta_data_file", "binaries", column: "binaries_id"
-  add_foreign_key "meta_data_file", "users"
+  add_foreign_key "meta_data_files", "binaries", column: "binaries_id"
+  add_foreign_key "meta_data_files", "users"
   add_foreign_key "shared_folders", "folders"
   add_foreign_key "shared_folders", "users"
 end

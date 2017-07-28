@@ -23,7 +23,29 @@ RSpec.describe "photo locations meta data records api" do
 
     it "returns the current users photo location meta data sorted by year" do
       user = create(:user)
-      # metadata_1 =
+      metadata_1 = MetaDataPhoto.create(lat: 12.44441, long: 122.445454, user_id: user.id, created_at: "19 Jul 1993")
+      metadata_2 = MetaDataPhoto.create(lat: 12.12323, long: 112.451234, user_id: user.id, created_at: "19 Jul 1994")
+      metadata_3 = MetaDataPhoto.create(lat: 12.65751, long: 132.445454, user_id: user.id, created_at: "19 Jul 1996")
+      metadata_4 = MetaDataPhoto.create(lat: 14.44441, long: 142.445454, user_id: user.id, created_at: "19 Jul 1997")
+      metadata_5 = MetaDataPhoto.create(lat: 14.12323, long: 142.451234, user_id: user.id, created_at: "19 Jul 1998")
+      metadata_6 = MetaDataPhoto.create(lat: 14.65751, long: 142.445454, user_id: user.id, created_at: "19 Jul 1999")
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      get '/api/v1/meta_data/photos/locations_by_year'
+
+      result = JSON.parse(response.body)
+
+      expect(response).to have_http_status(200)
+      expect(result["1993"]["latitude"]).to eq(metadata_1.lat)
+      expect(result["1993"]["longitude"]).to eq(metadata_1.long)
+      expect(result["1993"]["created_at"]).to eq(metadata_1.created_at)
+      expect(result["1997"]["latitude"]).to eq(metadata_4.lat)
+      expect(result["1997"]["longitude"]).to eq(metadata_4.long)
+      expect(result["1997"]["created_at"]).to eq(metadata_4.created_at)
+      expect(result["1999"]["latitude"]).to eq(metadata_6.lat)
+      expect(result["1999"]["longitude"]).to eq(metadata_6.long)
+      expect(result["1999"]["created_at"]).to eq(metadata_6.created_at)
     end
   end
 end

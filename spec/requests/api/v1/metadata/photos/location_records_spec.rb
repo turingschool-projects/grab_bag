@@ -13,6 +13,7 @@ RSpec.describe "photo locations meta data records api" do
       get '/api/v1/meta_data/photos/locations'
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(200)
       expect(result.first["latitude"]).to eq(metadata_1.lat)
       expect(result.first["longitude"]).to eq(metadata_1.long)

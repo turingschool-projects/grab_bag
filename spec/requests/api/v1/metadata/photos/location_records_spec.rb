@@ -20,5 +20,10 @@ RSpec.describe "photo locations meta data records api" do
       expect(result.last["latitude"]).to eq(metadata_3.lat)
       expect(result.last["longitude"]).to eq(metadata_3.long)
     end
+
+    it "returns the current users photo location meta data sorted by year" do
+      user = create(:user)
+      # metadata_1 =
+    end
   end
 end

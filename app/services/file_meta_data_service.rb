@@ -12,8 +12,8 @@ class FileMetaDataService
     words = text_detector(text)
     MetaDataFile.create!(text: text,
                       word_count: text.length,
-                      top_adjective: words[:adjectives].first[0],
-                      top_noun: words[:nouns].first[0],
+                      top_adjective: rank_words(words, :adjectives),
+                      top_noun: rank_words(words, :nouns),
                       user_id: @user.id,
                       binaries_id: binary_id)
 
@@ -37,5 +37,13 @@ class FileMetaDataService
 
   def collect_nouns(tgr, tags)
     tgr.get_nouns(tags)
+  end
+
+  def rank_words(words, type)
+    output = []
+    words[type].sort_by{ |k, v| v }.last(25).each do |words|
+      output << words[0]
+    end
+    output
   end
 end

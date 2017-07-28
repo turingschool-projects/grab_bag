@@ -10,6 +10,8 @@ describe "can receive json information do" do
     FileMetaDataService.new(yomu_1, user, binary.id).collect
     yomu_2 = Yomu.new('app/assets/tests/Essay Format Template.docx')
     FileMetaDataService.new(yomu_2, user, binary.id).collect
+    yomu_3 = Yomu.new('app/assets/tests/Overview_of_HighGrowth_Inc_Valuation.docx')
+    FileMetaDataService.new(yomu_3, user, binary.id).collect
 
     get '/api/v1/file/topwords'
     result = JSON.parse(response.body)

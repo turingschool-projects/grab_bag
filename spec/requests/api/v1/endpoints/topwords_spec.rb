@@ -16,5 +16,7 @@ describe "can receive json information do" do
     get '/api/v1/file/topwords'
     result = JSON.parse(response.body)
 
+    expect(result["adjectives"]).to be_valid
+    expect(result["nouns"]).to be_valid
   end
 end

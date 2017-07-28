@@ -41,7 +41,7 @@ class FileMetaDataService
 
   def rank_words(words, type)
     output = []
-    words[type].sort_by{ |k, v| v }.last(25).each do |words|
+    words[type].sort_by{ |k, v| v }.last(50).each do |words|
       output << words[0]
     end
     output

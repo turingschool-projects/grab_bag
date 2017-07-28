@@ -6,9 +6,8 @@ class UploadLogicHelper
 
   def topword_adjective
     list = MetaDataFile.where(user_id: user.id)
-    binding.pry
     top_adjectives = extract_words(list)
-    rank_words(top_adjectives)
+    top_words = rank_words(top_adjectives)
   end
 
   private
@@ -29,11 +28,10 @@ class UploadLogicHelper
   end
 
   def rank_words(words)
-    words_ranking = Hash.new
+    words_ranking = Hash.new(0)
     words.each do |word|
-      binding.pry
       words_ranking[word] += 1
     end
-    binding.pry
+    words_ranking
   end
 end

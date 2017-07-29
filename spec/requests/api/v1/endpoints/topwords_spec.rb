@@ -13,10 +13,12 @@ describe "can receive json information do" do
     yomu_3 = Yomu.new('app/assets/tests/Overview_of_HighGrowth_Inc_Valuation.docx')
     FileMetaDataService.new(yomu_3, user, binary.id).collect
 
-    get '/api/v1/file/topwords'
-    result = JSON.parse(response.body)
+    get '/api/v1/file/adjectives'
+    result_adjectives = JSON.parse(response.body, :symbolize_names => true)
+    get '/api/v1/file/nouns'
+    result_nouns = JSON.parse(response.body, :symbolize_names => true)
 
-    expect(result["adjectives"]).to be_a Hash
-    expect(result["nouns"]).to be_a Hash
+    expect(result_adjectives).to be_a Hash
+    expect(result_nouns).to be_a Hash
   end
 end

@@ -5,10 +5,18 @@ class UploadLogicHelper
   end
 
   def topwords
-    topwords = {}
+    topwords = Hash.new
     topwords[:adjectives] = topword_adjectives
     topwords[:nouns] = topword_nouns
     topwords
+  end
+
+  def adjectives
+    topword_adjectives
+  end
+
+  def nouns
+    topword_nouns
   end
 
 

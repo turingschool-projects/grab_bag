@@ -39,17 +39,16 @@ RSpec.describe "photo locations meta data records api" do
       get '/api/v1/meta_data/photos/locations_by_year'
 
       result = JSON.parse(response.body)
-binding.pry
+      
       expect(response).to have_http_status(200)
-      expect(result["1993"]["latitude"]).to eq(metadata_1.lat)
-      expect(result["1993"]["longitude"]).to eq(metadata_1.long)
-      expect(result["1993"]["created_at"]).to eq(metadata_1.created_at)
-      expect(result["1997"]["latitude"]).to eq(metadata_4.lat)
-      expect(result["1997"]["longitude"]).to eq(metadata_4.long)
-      expect(result["1997"]["created_at"]).to eq(metadata_4.created_at)
-      expect(result["1999"]["latitude"]).to eq(metadata_6.lat)
-      expect(result["1999"]["longitude"]).to eq(metadata_6.long)
-      expect(result["1999"]["created_at"]).to eq(metadata_6.created_at)
+      expect(result["1993"].first["latitude"]).to eq(metadata_1.lat)
+      expect(result["1993"].first["longitude"]).to eq(metadata_1.long)
+      expect(result["1997"].first["latitude"]).to eq(metadata_4.lat)
+      expect(result["1997"].first["longitude"]).to eq(metadata_4.long)
+      expect(result["1999"].first["latitude"]).to eq(metadata_6.lat)
+      expect(result["1999"].first["longitude"]).to eq(metadata_6.long)
+      expect(result["1994"].first["longitude"]).to eq(metadata_2.long)
+      expect(result["1994"].last["longitude"]).to eq(metadata_7.long)
     end
   end
 end

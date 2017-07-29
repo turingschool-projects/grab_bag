@@ -2,7 +2,7 @@ class UploadLogicHelper
 
   def initialize(current_user)
     @user = current_user
-    @queens_english = (%w(colour cheque theatre favourite flavour metre labour humour neighbour travelled travelling traveller fuelled fuelling defence))
+    @queens_english = (%w(colour cheque theatre favourite flavour metre labour humour neighbour travelled travelling traveller fuelled fuelling defence leukaemia manoeuvre paediatric licence))
   end
 
   def adjectives

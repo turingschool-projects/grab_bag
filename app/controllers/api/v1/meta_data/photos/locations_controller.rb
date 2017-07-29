@@ -5,15 +5,7 @@ class Api::V1::MetaData::Photos::LocationsController < ApplicationController
   end
 
   def show
-    @locations = {}
-    MetaDataPhoto.photos_with_a_location(current_user).order(created_at: :asc).each do |photo|
-      if @locations["#{photo.created_at.year}"]
-        @locations["#{photo.created_at.year}"] << {"latitude" => photo.lat, "longitude" => photo.long}
-      else
-        @locations["#{photo.created_at.year}"] = []
-        @locations["#{photo.created_at.year}"] << {"latitude" => photo.lat, "longitude" => photo.long}
-      end
-    end
+    @locations = MetaDataPhoto.photos_by_year(current_user)
     render json: @locations
   end
 end

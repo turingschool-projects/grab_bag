@@ -1,6 +1,5 @@
+var json_response = $.ajax('/api/v1/file/adjectives').responseJSON;
 var ctx = document.getElementById('verbage_chart').getContext('2d');
-var data = $.ajax('/api/v1/file/adjectives');
-debugger
 var myChart = new Chart(ctx, {
   type: 'polarArea',
   data: {

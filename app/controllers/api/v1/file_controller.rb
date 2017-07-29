@@ -8,4 +8,8 @@ class Api::V1::FileController < ApplicationController
     render json: UploadLogicHelper.new(current_user).nouns
   end
 
+  def american?
+    render json: UploadLogicHelper.new(current_user).american?
+  end
+
 end

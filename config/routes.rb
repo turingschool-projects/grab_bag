@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get '/user', to: "users#show"
       get '/file/adjectives', to: "file#topwords_adjectives"
       get '/file/nouns', to: "file#topwords_nouns"
+      get '/file/american', to: "file#american?"
       resources :metadata, only: [:index, :show]
     end
   end

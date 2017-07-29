@@ -2,6 +2,7 @@ class UploadLogicHelper
 
   def initialize(current_user)
     @user = current_user
+    @queens_english = (%w(colour cheque theatre favourite flavour metre labour humour neighbour travelled travelling traveller fuelled fuelling defence))
   end
 
   def topwords
@@ -19,9 +20,31 @@ class UploadLogicHelper
     topword_nouns
   end
 
+  def american?
+    american_nouns
+  end
+
 
   private
-  attr_reader :user
+  attr_reader :user, :queens_english
+
+  def american_nouns
+    list = MetaDataFile.where(user_id: user.id)
+    nouns = extract_words(list, "top_nouns")
+    find_real_english(nouns)
+  end
+
+  def find_real_english(list)
+    list = list
+    output = queens_english.map do |word|
+      if list.include?(word)
+        true
+      end
+    end
+    json_output = {}
+    json_output[:commonwealth] = output.include?(true)
+    json_output
+  end
 
   def topword_nouns
     list = MetaDataFile.where(user_id: user.id)
@@ -45,7 +68,7 @@ class UploadLogicHelper
         words_array = data.top_noun
       end
       words_array.each do |word|
-        output << word
+        output << word.downcase
       end
     end
     output

@@ -1,4 +1,11 @@
-var json_response = $.ajax('/api/v1/file/adjectives').responseJSON;
+$.ajax({
+     url : ("/api/v1/file/adjectives"),
+     type : 'GET',
+     success : function(data) {
+        var json_data = JSON.parse(data);
+          debugger
+    }
+});
 var ctx = document.getElementById('verbage_chart').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'polarArea',

@@ -35,6 +35,6 @@ describe "can receive json information do" do
     FileMetaDataService.new(yomu_3, user, binary.id).collect
 
     get '/api/v1/file/adjectives'
-    result_adjectives = JSON.parse(response.body, :symbolize_names => true)
+    result_adjectives = JSON.parse(response.body)
   end
 end

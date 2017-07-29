@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       namespace :meta_data do
         namespace :photos do
           get '/locations', to: "locations#index"
+          get '/locations_by_year', to: 'locations#show'
         end
       end
     end

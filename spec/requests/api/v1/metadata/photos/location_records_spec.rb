@@ -29,6 +29,10 @@ RSpec.describe "photo locations meta data records api" do
       metadata_4 = MetaDataPhoto.create(lat: 14.44441, long: 142.445454, user_id: user.id, created_at: "19 Jul 1997")
       metadata_5 = MetaDataPhoto.create(lat: 14.12323, long: 142.451234, user_id: user.id, created_at: "19 Jul 1998")
       metadata_6 = MetaDataPhoto.create(lat: 14.65751, long: 142.445454, user_id: user.id, created_at: "19 Jul 1999")
+      metadata_7 = MetaDataPhoto.create(lat: 14.4523, long: 132.454534, user_id: user.id, created_at: "20 Jul 1994")
+      metadata_8 = MetaDataPhoto.create(lat: 19.12341, long: 112.417854, user_id: user.id, created_at: "20 Jul 1997")
+
+
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 

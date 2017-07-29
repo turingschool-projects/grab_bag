@@ -29,13 +29,14 @@ class UploadLogicHelper
 
   def find_real_english(list)
     list = list
+    counter = 0
     output = queens_english.map do |word|
       if list.include?(word)
-        true
+        counter += 1
       end
     end
     json_output = {}
-    json_output[:commonwealth] = output.include?(true)
+    json_output[:commonwealth] = (list.count/counter)
     json_output
   end
 

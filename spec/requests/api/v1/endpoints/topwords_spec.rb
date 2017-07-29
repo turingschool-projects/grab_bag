@@ -33,10 +33,10 @@ describe "can receive json information do" do
   end
 
   scenario "returns whether user is american or not based on noun spelling" do
-  
+
     get '/api/v1/file/american'
     result_american = JSON.parse(response.body, :symbolize_names => true)
 
-    expect(result_american[:commonwealth]).to eq(true)
+    expect(result_american[:commonwealth]).to eq(11)
   end
 end

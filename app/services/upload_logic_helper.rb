@@ -5,13 +5,6 @@ class UploadLogicHelper
     @queens_english = (%w(colour cheque theatre favourite flavour metre labour humour neighbour travelled travelling traveller fuelled fuelling defence))
   end
 
-  def topwords
-    topwords = Hash.new
-    topwords[:adjectives] = topword_adjectives
-    topwords[:nouns] = topword_nouns
-    topwords
-  end
-
   def adjectives
     topword_adjectives
   end

@@ -8,17 +8,17 @@ class FacebookService
   end
 
   def uploaded_photos_call
-    get_uploaded_pics
-    # get_tagged_pics
-    # uploaded_photos_call(response_json[:paging][:next]) if response_json[:paging][:next]
+    photo_data = get_uploaded_pics[:data]
+    photo_data << get_tagged_pics[:data]
+    photo_data.flatten
   end
 
   def get_uploaded_pics
-    get_url("#{@uid}/photos?type=uploaded&fields=created_time,from,id,images,name,link,place,comments{like_count,comment_count,message,likes,from},tags{id,name},reactions{id,name,username,type}&access_token=#{@token}")
+    get_url("#{@uid}/photos?type=uploaded&fields=created_time,from,id,images,name,link,place,comments{like_count,comment_count,message,likes,from},tags{id,name},reactions{id,name,username,type}&limit=1000&access_token=#{@token}")
   end
 
   def get_tagged_pics
-    get_url("#{@uid}/photos?fields=created_time,from,id,images,name,link,place,comments{like_count,comment_count,message,likes,from},tags{id,name},reactions{id,name,username,type}&access_token=#{@token}")
+    get_url("#{@uid}/photos?fields=created_time,from,id,images,name,link,place,comments{like_count,comment_count,message,likes,from},tags{id,name},reactions{id,name,username,type}&limit=1000&access_token=#{@token}")
   end
 
   def get_url(path)
@@ -30,6 +30,6 @@ class FacebookService
   end
 
   def self.get_data(user)
-    self.new(user).uploaded_photos_call[:data]
+    self.new(user).uploaded_photos_call
   end
 end

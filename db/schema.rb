@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525030748) do
+ActiveRecord::Schema.define(version: 20170727215030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,46 @@ ActiveRecord::Schema.define(version: 20170525030748) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
+  create_table "fb_comments", force: :cascade do |t|
+    t.string   "fb_uid"
+    t.string   "fb_uname"
+    t.integer  "like_count"
+    t.integer  "comment_count"
+    t.string   "message"
+    t.integer  "meta_data_photo_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["meta_data_photo_id"], name: "index_fb_comments_on_meta_data_photo_id", using: :btree
+  end
+
+  create_table "fb_places", force: :cascade do |t|
+    t.string "fb_place_id"
+    t.string "name"
+    t.string "city"
+    t.string "country"
+    t.float  "lat"
+    t.float  "long"
+  end
+
+  create_table "fb_reactions", force: :cascade do |t|
+    t.string   "fb_uid"
+    t.string   "fb_uname"
+    t.string   "reaction_type"
+    t.integer  "meta_data_photo_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["meta_data_photo_id"], name: "index_fb_reactions_on_meta_data_photo_id", using: :btree
+  end
+
+  create_table "fb_tags", force: :cascade do |t|
+    t.string   "fb_uid"
+    t.string   "fb_uname"
+    t.integer  "meta_data_photo_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["meta_data_photo_id"], name: "index_fb_tags_on_meta_data_photo_id", using: :btree
+  end
+
   create_table "folders", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -59,6 +99,40 @@ ActiveRecord::Schema.define(version: 20170525030748) do
     t.datetime "updated_at",    null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
+  create_table "meta_data_files", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "binaries_id"
+    t.string   "text"
+    t.integer  "word_count"
+    t.string   "top_adjective", default: [],              array: true
+    t.string   "top_noun",      default: [],              array: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["binaries_id"], name: "index_meta_data_files_on_binaries_id", using: :btree
+    t.index ["user_id"], name: "index_meta_data_files_on_user_id", using: :btree
+  end
+
+  create_table "meta_data_photos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "model"
+    t.string   "shutter_speed"
+    t.float    "aperture"
+    t.float    "lat"
+    t.float    "long"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "image"
+    t.string   "created_time"
+    t.string   "fb_uname"
+    t.string   "fb_uid"
+    t.string   "fb_photo_id"
+    t.integer  "fb_place_id"
+    t.index ["fb_place_id"], name: "index_meta_data_photos_on_fb_place_id", using: :btree
+    t.index ["user_id"], name: "index_meta_data_photos_on_user_id", using: :btree
   end
 
   create_table "shared_folders", force: :cascade do |t|
@@ -89,9 +163,15 @@ ActiveRecord::Schema.define(version: 20170525030748) do
   add_foreign_key "binaries", "folders"
   add_foreign_key "comments", "binaries"
   add_foreign_key "comments", "users"
+  add_foreign_key "fb_comments", "meta_data_photos"
+  add_foreign_key "fb_reactions", "meta_data_photos"
+  add_foreign_key "fb_tags", "meta_data_photos"
   add_foreign_key "folders", "folders"
   add_foreign_key "folders", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "meta_data_files", "binaries", column: "binaries_id"
+  add_foreign_key "meta_data_files", "users"
+  add_foreign_key "meta_data_photos", "users"
   add_foreign_key "shared_folders", "folders"
   add_foreign_key "shared_folders", "users"
 end

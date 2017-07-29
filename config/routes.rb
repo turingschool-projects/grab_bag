@@ -3,6 +3,21 @@ Rails.application.routes.draw do
 
   root 'landing#index', as: :landing_page
 
+  namespace :api do
+    namespace :v1 do
+        get '/user', to: "users#show"
+        get '/file/adjectives', to: "file#topwords_adjectives"
+        get '/file/nouns', to: "file#topwords_nouns"
+        get '/file/american', to: "file#american?"
+      namespace :meta_data do
+        namespace :photos do
+          get '/locations', to: "locations#index"
+          get '/locations_by_year', to: 'locations#show'
+        end
+      end
+    end
+  end
+
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
 
@@ -15,6 +30,9 @@ Rails.application.routes.draw do
   get '/sign_up', to: 'sign_up#new'
   post '/sign_up', to: 'sign_up#create'
   get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :dashboard, only: [:index]
+  resources :photos, only: [:index]
 
   resources :public_folders, only: :index
   namespace :users, path: ":username" do
@@ -51,4 +69,5 @@ Rails.application.routes.draw do
     get '/', to: 'users#show'
   end
 
+  resources :photos, only: [:index]
 end

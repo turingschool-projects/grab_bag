@@ -8,27 +8,18 @@ class Photos
         if photo[:place]
           place = FbPlace.find_or_create_by(fb_place_id: photo[:place][:id]) do |place|
             place.name = photo[:place][:name]
-            place.city = photo[:place][:location][:city]
-            place.country = photo[:place][:location][:country]
-            place.lat = photo[:place][:location][:latitude]
-            place.long = photo[:place][:location][:longitude]
-          end
-        else
-          place = FbPlace.find_or_create_by(name: "unknown location") do |place|
-            place.fb_place_id = "unknown"
-            place.city = "unknown"
-            place.country = "unknown"
-            place.lat = 25.0
-            place.long = 71.0
+            place.city = photo[:place][:location][:city] rescue nil
+            place.country = photo[:place][:location][:country] rescue nil
+            place.lat = photo[:place][:location][:latitude] rescue nil
+            place.long = photo[:place][:location][:longitude] rescue nil
           end
         end
-
-          meta_data = MetaDataPhoto.create!(image: photo[:images][0][:source],
+        meta_data = MetaDataPhoto.create!(image: photo[:images][0][:source],
                         created_time: photo[:created_time],
                         fb_uname: photo[:from][:name],
                         fb_uid: photo[:from][:id],
                         fb_photo_id: photo[:id],
-                        fb_place_id: place.id,
+                        fb_place_id: place.try(:id),
                         user_id: user.id
                         )
 

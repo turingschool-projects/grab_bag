@@ -19,7 +19,6 @@
 //= require materialize
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
-//= require navbar/dropdown
 //= require_tree .
 
 $(function() {

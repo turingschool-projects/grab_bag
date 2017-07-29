@@ -56,6 +56,6 @@ class UploadLogicHelper
     words.each do |word|
       words_ranking[word] += 1
     end
-    words_ranking
+    words_ranking.sort_by {|_key, value| value}.last(6).to_h
   end
 end

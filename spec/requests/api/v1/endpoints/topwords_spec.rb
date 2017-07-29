@@ -36,7 +36,5 @@ describe "can receive json information do" do
 
     get '/api/v1/file/adjectives'
     result_adjectives = JSON.parse(response.body, :symbolize_names => true)
-
-    binding.pry
   end
 end

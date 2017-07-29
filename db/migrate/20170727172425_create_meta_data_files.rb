@@ -5,8 +5,8 @@ class CreateMetaDataFiles < ActiveRecord::Migration[5.0]
       t.references :binaries, foreign_key: true
       t.string :text
       t.integer :word_count
-      t.string :top_adjective
-      t.string :top_noun
+      t.string :top_adjective, array: true, default: []
+      t.string :top_noun, array: true, default: []
       t.timestamps
     end
   end

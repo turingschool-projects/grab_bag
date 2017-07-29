@@ -3,6 +3,16 @@ Rails.application.routes.draw do
 
   root 'landing#index', as: :landing_page
 
+  namespace :api do
+    namespace :v1 do
+      get '/user', to: "users#show"
+      get '/file/adjectives', to: "file#topwords_adjectives"
+      get '/file/nouns', to: "file#topwords_nouns"
+      get '/file/american', to: "file#american?"
+      resources :metadata, only: [:index, :show]
+    end
+  end
+
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
 

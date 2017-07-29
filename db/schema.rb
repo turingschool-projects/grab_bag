@@ -106,10 +106,10 @@ ActiveRecord::Schema.define(version: 20170727215030) do
     t.integer  "binaries_id"
     t.string   "text"
     t.integer  "word_count"
-    t.string   "top_adjective"
-    t.string   "top_noun"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "top_adjective", default: [],              array: true
+    t.string   "top_noun",      default: [],              array: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["binaries_id"], name: "index_meta_data_files_on_binaries_id", using: :btree
     t.index ["user_id"], name: "index_meta_data_files_on_user_id", using: :btree
   end
